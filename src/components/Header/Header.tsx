@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { DiCssdeck } from 'react-icons/di';
-import { ImLinkedin, ImGithub, ImFacebook } from 'react-icons/im';
+import { ImLinkedin, ImGithub, ImFacebook2 } from 'react-icons/im';
 
 import { Container } from '../Layout/LayoutStyle';
 
@@ -13,10 +13,10 @@ export const HeaderWrapper = styled.nav`
 	padding: 2rem 0;
 `;
 
-export const NavItems = styled.div<{ flex?: number }>`
+export const NavItems = styled.div<{ flex?: number; start?: boolean }>`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: ${({ start }) => (start ? 'flex-start' : 'center')};
 	margin-right: 1rem;
 
 	flex: ${({ flex }) => flex};
@@ -39,7 +39,7 @@ export const NavItem = styled.div<{ color?: string }>`
 export const LogoLink = styled.a`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 
 	transition: 0.2s ease-in-out all;
 
@@ -56,21 +56,22 @@ const headers = [
 
 const socials = [
 	{
+		name: 'Github',
+		link: 'https://github.com/adiathasan',
+		comp: <ImGithub size='2.5rem' />,
+		color: '#ddeeff',
+	},
+	{
 		name: 'Linkdin',
 		link: 'https://linkedin.com/in/adiat-hasan-1924681b0',
 		color: '#7ab3ff',
 		comp: <ImLinkedin size='2.5rem' />,
 	},
 	{
-		name: 'Github',
-		link: 'https://github.com/adiathasan',
-		comp: <ImGithub size='2.5rem' />,
-	},
-	{
 		name: 'Facebook',
 		link: 'https://www.facebook.com/adiathasan.ratul',
 		color: '#358bfa',
-		comp: <ImFacebook size='2.5rem' />,
+		comp: <ImFacebook2 size='2.5rem' />,
 	},
 ];
 
@@ -78,11 +79,12 @@ const Header: React.FC = () => {
 	return (
 		<Container>
 			<HeaderWrapper>
-				<NavItems flex={1}>
+				<NavItems flex={1} start>
 					<NavItem>
 						<Link href='#me' passHref>
 							<LogoLink>
-								<DiCssdeck size='3rem' /> <span>Portfolio</span>
+								<DiCssdeck size='3rem' />{' '}
+								<span className='ml-2 text-3xl '>Portfolio</span>
 							</LogoLink>
 						</Link>
 					</NavItem>
